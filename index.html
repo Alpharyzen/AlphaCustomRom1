@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ALPHA OS | HyperOS 2.2</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+RESET
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:#efefef;
+overflow-x:hidden;
+color:#111;
+}
+
+/* =========================
+SCROLLBAR
+========================= */
+
+::-webkit-scrollbar{
+width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#a6ff00;
+border-radius:20px;
+}
+
+/* =========================
+NAVBAR
+========================= */
+
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:25px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(20px);
+z-index:999;
+border-bottom:1px solid rgba(0,0,0,.05);
+}
+
+.logo{
+font-size:36px;
+font-weight:900;
+letter-spacing:2px;
+}
+
+.logo span{
+color:#a6ff00;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:45px;
+}
+
+nav ul li a{
+text-decoration:none;
+font-size:15px;
+font-weight:700;
+color:#111;
+transition:.3s;
+}
+
+nav ul li a:hover{
+color:#a6ff00;
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
+min-height:100vh;
+padding:180px 7% 120px;
+position:relative;
+overflow:hidden;
+}
+
+/* HYPEROS TEXT */
+
+.hero-small{
+font-size:13px;
+letter-spacing:5px;
+opacity:.5;
+margin-bottom:10px;
+position:relative;
+z-index:5;
+}
+
+/* NEXT GEN */
+
+.hero-nextgen{
+font-size:18px;
+font-weight:500;
+letter-spacing:2px;
+color:#555;
+margin-bottom:25px;
+position:relative;
+z-index:5;
+}
+
+/* ALPHA OS */
+
+.hero h1{
+font-size:190px;
+line-height:160px;
+font-weight:900;
+letter-spacing:-10px;
+position:relative;
+z-index:5;
+}
+
+.hero h1 span{
+color:#a6ff00;
+}
+
+/* DESCRIPTION */
+
+.hero p{
+margin-top:80px;
+font-size:20px;
+line-height:40px;
+max-width:850px;
+color:#555;
+position:relative;
+z-index:5;
+}
+
+/* =========================
+BUTTONS
+========================= */
+
+.hero-buttons{
+margin-top:45px;
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+position:relative;
+z-index:5;
+}
+
+.btn{
+padding:20px 45px;
+border:none;
+border-radius:100px;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+transition:.4s;
+}
+
+.btn-primary{
+background:#111;
+color:white;
+}
+
+.btn-primary:hover{
+background:#a6ff00;
+color:black;
+transform:translateY(-5px);
+}
+
+.btn-secondary{
+background:white;
+color:#111;
+border:1px solid rgba(0,0,0,.08);
+}
+
+.btn-secondary:hover{
+transform:translateY(-5px);
+}
+
+/* =========================
+GALLERY
+========================= */
+
+.hero-gallery{
+margin-top:90px;
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:25px;
+position:relative;
+z-index:5;
+}
+
+.hero-gallery img{
+width:100%;
+height:360px;
+object-fit:cover;
+border-radius:35px;
+box-shadow:0 20px 60px rgba(0,0,0,.15);
+transition:.6s;
+}
+
+.hero-gallery img:hover{
+transform:scale(1.03);
+filter:brightness(1.05);
+}
+
+/* =========================
+CHANGELOG
+========================= */
+
+.changelog{
+padding:150px 7%;
+background:white;
+display:grid;
+grid-template-columns:1fr 1.5fr;
+gap:80px;
+}
+
+.left-title{
+font-size:130px;
+line-height:110px;
+font-weight:300;
+letter-spacing:-6px;
+}
+
+.right-box h2{
+font-size:100px;
+line-height:90px;
+letter-spacing:-6px;
+margin-bottom:40px;
+}
+
+.changelog-list{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.change-card{
+background:#f4f4f4;
+padding:28px;
+border-radius:30px;
+transition:.4s;
+}
+
+.change-card:hover{
+background:#111;
+color:white;
+transform:translateY(-8px);
+}
+
+.change-card h3{
+font-size:22px;
+margin-bottom:10px;
+}
+
+.change-card p{
+font-size:15px;
+line-height:28px;
+opacity:.7;
+}
+
+/* =========================
+DOWNLOAD
+========================= */
+
+.download{
+padding:170px 7%;
+text-align:center;
+background:#111;
+color:white;
+position:relative;
+overflow:hidden;
+}
+
+.download::before{
+content:'';
+position:absolute;
+width:700px;
+height:700px;
+background:#a6ff00;
+filter:blur(250px);
+opacity:.15;
+top:-350px;
+left:50%;
+transform:translateX(-50%);
+}
+
+.download h1{
+font-size:160px;
+line-height:130px;
+letter-spacing:-8px;
+position:relative;
+z-index:5;
+}
+
+.download p{
+margin:40px auto;
+max-width:850px;
+font-size:20px;
+line-height:40px;
+color:#aaa;
+position:relative;
+z-index:5;
+}
+
+.download-btn{
+padding:22px 55px;
+font-size:17px;
+font-weight:700;
+background:#a6ff00;
+border:none;
+border-radius:100px;
+cursor:pointer;
+transition:.4s;
+position:relative;
+z-index:5;
+color:black;
+}
+
+.download-btn:hover{
+transform:scale(1.06);
+background:white;
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+padding:45px 7%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+flex-wrap:wrap;
+gap:20px;
+background:#0a0a0a;
+color:white;
+}
+
+footer h2{
+font-size:30px;
+}
+
+footer h2 span{
+color:#a6ff00;
+}
+
+footer p{
+color:#777;
+}
+
+/* =========================
+MOBILE VERSION
+========================= */
+
+@media(max-width:1000px){
+
+.hero{
+padding-top:150px;
+}
+
+.hero-small{
+font-size:11px;
+letter-spacing:3px;
+}
+
+.hero-nextgen{
+font-size:15px;
+}
+
+.hero h1{
+font-size:90px;
+line-height:85px;
+margin-top:20px;
+}
+
+.hero p{
+margin-top:50px;
+font-size:17px;
+line-height:32px;
+}
+
+.hero-gallery{
+grid-template-columns:1fr;
+}
+
+.hero-gallery img{
+height:250px;
+}
+
+.left-title{
+font-size:80px;
+line-height:75px;
+}
+
+.right-box h2{
+font-size:65px;
+line-height:60px;
+}
+
+.download h1{
+font-size:75px;
+line-height:75px;
+}
+
+.changelog{
+grid-template-columns:1fr;
+}
+
+nav ul{
+display:none;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+
+<div class="logo">
+ALPHA<span>OS</span>
+</div>
+
+<ul>
+<li><a href="#">HOME</a></li>
+<li><a href="#changelog">CHANGELOG</a></li>
+<li><a href="#download">DOWNLOAD</a></li>
+</ul>
+
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-small">
+HYPEROS 2.2 CUSTOM ROM
+</div>
+
+<div class="hero-nextgen">
+NEXT GEN
+</div>
+
+<!-- TITLE -->
+
+<h1>
+ALPHA <span>OS</span>
+</h1>
+
+<!-- DESCRIPTION -->
+
+<p>
+A futuristic HyperOS 2.2 custom ROM designed for extreme smoothness,
+gaming optimization, premium visuals and next generation Android experience.
+</p>
+
+<!-- BUTTONS -->
+
+<div class="hero-buttons">
+
+<a href="https://t.me/hypereu" target="_blank">
+<button class="btn btn-primary">
+JOIN TELEGRAM
+</button>
+</a>
+
+<a href="#changelog">
+<button class="btn btn-secondary">
+VIEW CHANGELOG
+</button>
+</a>
+
+</div>
+
+<!-- GALLERY -->
+
+<div class="hero-gallery">
+
+<img src="https://i.ibb.co/LhdzZcxs/Picsart-26-05-25-19-53-24-203.png">
+
+<img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1600&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?q=80&w=1600&auto=format&fit=crop">
+
+<img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?q=80&w=1600&auto=format&fit=crop">
+
+</div>
+
+</section>
+
+<!-- CHANGELOG -->
+
+<section class="changelog" id="changelog">
+
+<div class="left-title">
+1.0
+</div>
+
+<div class="right-box">
+
+<h2>
+CHANGELOG
+</h2>
+
+<div class="changelog-list">
+
+<div class="change-card">
+<h3>MOBILE ICON</h3>
+<p>New premium mobile signal icons added.</p>
+</div>
+
+<div class="change-card">
+<h3>WIFI ICON</h3>
+<p>Redesigned WiFi icons for modern look.</p>
+</div>
+
+<div class="change-card">
+<h3>VOL ICON</h3>
+<p>New volume panel icons and visuals.</p>
+</div>
+
+<div class="change-card">
+<h3>VOL WIFI ICON</h3>
+<p>Modern VoLTE and VoWiFi icons included.</p>
+</div>
+
+<div class="change-card">
+<h3>CLOCK STYLE</h3>
+<p>New futuristic HyperOS clock styles.</p>
+</div>
+
+<div class="change-card">
+<h3>FINGERPRINT</h3>
+<p>Premium fingerprint animations added.</p>
+</div>
+
+<div class="change-card">
+<h3>NEW ABOUT PHONE</h3>
+<p>Completely redesigned About Phone section.</p>
+</div>
+
+<div class="change-card">
+<h3>120 FPS</h3>
+<p>120 FPS unlocked for pro games.</p>
+</div>
+
+<div class="change-card">
+<h3>COREPATCH</h3>
+<p>Inbuilt CorePatch support integrated.</p>
+</div>
+
+<div class="change-card">
+<h3>SCREENSHOT FLAG</h3>
+<p>Screenshot restriction removed systemwide.</p>
+</div>
+
+<div class="change-card">
+<h3>GOOGLE PHOTOS</h3>
+<p>Unlimited Google Photos storage enabled.</p>
+</div>
+
+<div class="change-card">
+<h3>NEW ICONS</h3>
+<p>New HyperOS beta icon pack included.</p>
+</div>
+
+<div class="change-card">
+<h3>NEW CC</h3>
+<p>Redesigned premium Control Center UI.</p>
+</div>
+
+<div class="change-card">
+<h3>MIUI DIALER</h3>
+<p>MIUI Dialer and Contacts included.</p>
+</div>
+
+<div class="change-card">
+<h3>CALL RECORDING</h3>
+<p>Native call recording enabled.</p>
+</div>
+
+<div class="change-card">
+<h3>STATUS BAR</h3>
+<p>Improved status bar padding and spacing.</p>
+</div>
+
+<div class="change-card">
+<h3>SCREEN RECORDING</h3>
+<p>Enhanced screen recording experience.</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DOWNLOAD -->
+
+<section class="download" id="download">
+
+<h1>
+JOIN<br>
+TELEGRAM
+</h1>
+
+<p>
+Get latest ALPHA OS updates, downloads,
+screenshots and community support directly from our Telegram channel.
+</p>
+
+<a href="https://t.me/hypereu" target="_blank">
+
+<button class="download-btn">
+JOIN NOW
+</button>
+
+</a>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h2>
+ALPHA<span>OS</span>
+</h2>
+
+<p>
+Crafted with passion • HyperOS 2.2
+</p>
+
+</footer>
+
+</body>
+</html>
