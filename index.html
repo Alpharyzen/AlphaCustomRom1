@@ -4,10 +4,11 @@
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<title>ALPHA OS</title>
+<title>Redmi Note 13 Pro+ 5G </title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.min.css">
@@ -22,12 +23,14 @@ padding:0;
 box-sizing:border-box;
 font-family:'Outfit',sans-serif;
 scroll-behavior:smooth;
+-webkit-tap-highlight-color:transparent;
 }
 
 body{
 background:#000;
 overflow-x:hidden;
 color:white;
+touch-action:manipulation;
 }
 
 /* ================= SCROLLBAR ================= */
@@ -200,6 +203,8 @@ align-items:center;
 justify-content:center;
 gap:12px;
 transition:.4s;
+border:none;
+cursor:pointer;
 }
 
 .download-btn{
@@ -224,6 +229,52 @@ color:white;
 background:white;
 color:black;
 transform:translateY(-6px);
+}
+
+/* ================= DOWNLOAD POPUP ================= */
+
+.download-wrapper{
+position:relative;
+display:inline-block;
+}
+
+.download-menu{
+position:absolute;
+top:85px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(15,15,15,.95);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(20px);
+border-radius:25px;
+padding:14px;
+display:none;
+flex-direction:column;
+gap:10px;
+min-width:220px;
+z-index:100;
+box-shadow:0 0 40px rgba(0,0,0,.4);
+}
+
+.download-menu a{
+text-decoration:none;
+color:white;
+padding:14px 18px;
+border-radius:18px;
+font-size:14px;
+transition:.3s;
+background:rgba(255,255,255,.03);
+text-align:center;
+}
+
+.download-menu a:hover{
+background:#9dff00;
+color:black;
+transform:scale(1.03);
+}
+
+.download-menu.show{
+display:flex;
 }
 
 /* ================= PHOTOS ================= */
@@ -432,8 +483,6 @@ grid-template-columns:1fr;
 
 @media(max-width:700px){
 
-/* MOBILE NAVBAR FIX */
-
 nav{
 padding:16px 5%;
 flex-direction:column;
@@ -455,8 +504,6 @@ align-items:center;
 .nav-links a{
 font-size:13px;
 }
-
-/* HERO */
 
 .hero{
 padding:170px 6% 100px;
@@ -494,6 +541,12 @@ line-height:30px;
 .btn{
 width:100%;
 justify-content:center;
+}
+
+.download-menu{
+top:75px;
+width:100%;
+min-width:100%;
 }
 
 }
@@ -560,17 +613,7 @@ next generation Android customization.
 
 <div class="hero-buttons">
 
-<!-- DOWNLOAD BUTTON -->
-
-<a href="https://t.me/hypereu"
-target="_blank"
-class="btn download-btn">
-
-<i class="ri-download-2-line"></i>
-
-DOWNLOAD
-
-</a>
+<!-- CHANGELOG BUTTON FIRST -->
 
 <a href="#changelog" class="btn change-btn">
 
@@ -579,6 +622,36 @@ DOWNLOAD
 CHANGELOG
 
 </a>
+
+<!-- DOWNLOAD POPUP -->
+
+<div class="download-wrapper">
+
+<button class="btn download-btn" onclick="toggleDownloads()">
+
+<i class="ri-download-2-line"></i>
+
+DOWNLOAD
+
+</button>
+
+<div class="download-menu" id="downloadMenu">
+
+<a href="https://t.me/hypereu" target="_blank">
+HyperOS 1
+</a>
+
+<a href="https://t.me/hypereu" target="_blank">
+HyperOS 2
+</a>
+
+<a href="https://t.me/hypereu" target="_blank">
+HyperOS 3
+</a>
+
+</div>
+
+</div>
 
 </div>
 
@@ -756,6 +829,8 @@ JOIN NOW
 
 <script>
 
+/* ================= SCROLL REVEAL ================= */
+
 window.addEventListener('scroll', reveal);
 
 function reveal(){
@@ -797,6 +872,30 @@ let elementVisible = 100;
 if(elementTop < windowHeight - elementVisible){
 rights[i].classList.add('active');
 }
+
+}
+
+}
+
+/* ================= DOWNLOAD POPUP ================= */
+
+function toggleDownloads(){
+
+document
+.getElementById("downloadMenu")
+.classList
+.toggle("show");
+
+}
+
+window.onclick = function(e){
+
+if(!e.target.closest('.download-wrapper')){
+
+document
+.getElementById("downloadMenu")
+.classList
+.remove("show");
 
 }
 
